@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Railsblog</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,7 +11,8 @@
 	<% if user_signed_in? %>
 		<p>hello, <%= current_user.email %> - <%= link_to "logout", destroy_user_session_url, method: :delete %>
 	<% else %>
-		<%= link_to "register", new_user_registration_url %> / <%= link_to "login", new_user_session_url %>
+		<%= link_to "register", new_user_registration_url %> / <%= link_to "login", new_user_session_url %> /
+		<%= link_to "Login with Facebook", user_omniauth_authorize_path(:facebook), id: "login_facebook" %>
 	<% end %>
 </header>
 <p class="notice"><%= notice %></p>
