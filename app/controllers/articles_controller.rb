@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_user
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
@@ -25,7 +26,6 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @user = User.find(params[:user_id])
     @article = Article.new(article_params)
     @user.articles << @article
 
@@ -59,7 +59,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to user_url(@user), notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,10 @@ class ArticlesController < ApplicationController
     def set_article
       @article = Article.find(params[:id])
     end
+
+    def set_user 
+      @user = User.find(params[:user_id])
+    end 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params

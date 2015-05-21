@@ -1,5 +1,6 @@
 <% articles.each do |article| %>
 	<p><%= article.title %></p>
 	<p><%= article.content %></p>
+	<% if article.user == current_user %><p><%= link_to "delete", user_article_path(article.user, article), method: :delete %></p><% end %>
 	<hr />
 <% end %>

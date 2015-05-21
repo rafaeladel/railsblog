@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'mysql2'
 
 gem 'devise'
+gem 'pundit'
 
 gem 'omniauth-facebook'
 
