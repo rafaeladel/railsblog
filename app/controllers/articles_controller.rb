@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_user
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, only: :destroy
 
   # GET /articles
   # GET /articles.json
@@ -57,6 +58,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    authorize @article
     @article.destroy
     respond_to do |format|
       format.html { redirect_to user_url(@user), notice: 'Article was successfully destroyed.' }
