@@ -5,6 +5,6 @@ class ArticlePolicy
 	end
 
 	def destroy?
-		@user == @article.user
+		!@user.nil? && (@user.role?(:admin) || @user == @article.user)
 	end
 end
